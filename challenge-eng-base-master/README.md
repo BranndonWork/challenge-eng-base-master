@@ -17,8 +17,7 @@ To get the project up and running:
 
 To restart the project:
 
-    docker-compose down
-    docker-compose up backend or docker-compose up backend site
+    ./start_services.sh
 
 Starting the backend service automatically starts the mariadb database service
 as a dependency.
@@ -35,6 +34,22 @@ To execute the data load cli command:
 
     docker-compose exec backend flask load-movielens
 
-
 Code changes should trigger live reload of the docker services in the docker
 containers by way of the volume binds specified in the compose file.
+
+## Testing
+
+To run all tests:
+
+    ./run_all_tests.sh
+
+To run frontend tests:
+
+    cd frontend-react
+    ./test.sh
+
+To run backend tests:
+
+    cd backend-python
+    ./test.sh
+
