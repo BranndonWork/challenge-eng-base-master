@@ -3,6 +3,7 @@ version: "3.7"
 services:
   db:
     image: mariadb:10.5.8
+    container_name: challenge_db
     environment:
       - MYSQL_ROOT_PASSWORD=testpass
       - MYSQL_DATABASE=challenge
@@ -12,6 +13,7 @@ services:
 
   backend:
     build: backend-python
+    container_name: challenge_backend
     depends_on:
       - db
     restart: always
@@ -24,6 +26,7 @@ services:
 
   site:
     build: frontend-react
+    container_name: challenge_site
     restart: always
     depends_on:
       - backend
@@ -31,6 +34,13 @@ services:
       - ./frontend-react:/site
     ports:
       - "8090:80"
+
+  adminer:
+    image: adminer
+    container_name: challenge_db_adminer
+    restart: always
+    ports:
+      - 8888:8080
 
 volumes:
   devmysqldb:
